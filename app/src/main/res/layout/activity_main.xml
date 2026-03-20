@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/launcher_bg" android:fillViewport="true">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:paddingTop="48dp"
+        android:paddingBottom="24dp" android:paddingHorizontal="20dp">
+
+        <!-- Header -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="⊞  Floating Windows" android:textSize="22sp"
+                    android:textColor="#FFFFFFFF" android:fontFamily="sans-serif-light"/>
+                <TextView android:id="@+id/tvModeIndicator"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="🪟 Overlay Mode" android:textSize="11sp"
+                    android:textColor="#FF3FB950" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <!-- Settings gear icon -->
+            <LinearLayout
+                android:id="@+id/btnSettingsActivity"
+                android:layout_width="44dp" android:layout_height="44dp"
+                android:gravity="center" android:background="@drawable/card_bg"
+                android:clickable="true" android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="⚙️" android:textSize="20sp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Quick groups strip -->
+        <LinearLayout android:id="@+id/quickGroupsRow"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="12dp"
+            android:visibility="gone"/>
+
+        <!-- Status card -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@drawable/card_bg" android:orientation="horizontal"
+            android:gravity="center_vertical" android:padding="14dp"
+            android:layout_marginBottom="14dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="🟢  Service running"
+                android:textSize="13sp" android:textColor="#FF1A1A1A"/>
+            <TextView android:id="@+id/tvWindowCount"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="0 window(s)" android:textSize="12sp"
+                android:textColor="#FF0067C0" android:fontFamily="sans-serif-medium"/>
+        </LinearLayout>
+
+        <!-- VIRTUAL DESKTOP -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="VIRTUAL DESKTOP" android:textSize="10sp"
+            android:textColor="#CCFFFFFF" android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout android:id="@+id/btnVirtualDesktop"
+            android:layout_width="match_parent" android:layout_height="68dp"
+            android:background="@drawable/card_bg" android:orientation="horizontal"
+            android:gravity="center_vertical" android:padding="14dp"
+            android:layout_marginBottom="14dp" android:clickable="true" android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="🖥️" android:textSize="30sp" android:layout_marginEnd="12dp"/>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Virtual Desktop Mode" android:textSize="15sp"
+                    android:textColor="#FF1A1A1A" android:fontFamily="sans-serif-medium"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="No permission needed  •  Works on all phones"
+                    android:textSize="11sp" android:textColor="#FF888888"/>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="›" android:textSize="22sp" android:textColor="#FF0067C0"/>
+        </LinearLayout>
+
+        <!-- TOOLS ROW -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="TOOLS" android:textSize="10sp"
+            android:textColor="#CCFFFFFF" android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="14dp">
+
+            <!-- App Launcher -->
+            <LinearLayout android:id="@+id/btnAppLauncher"
+                android:layout_width="0dp" android:layout_height="72dp" android:layout_weight="1"
+                android:background="@drawable/card_bg" android:orientation="vertical"
+                android:gravity="center" android:padding="10dp"
+                android:clickable="true" android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="⊞" android:textSize="24sp" android:textColor="#FF0067C0"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Launcher" android:textSize="11sp"
+                    android:textColor="#FF1A1A1A" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <View android:layout_width="8dp" android:layout_height="match_parent"/>
+
+            <!-- App Groups -->
+            <LinearLayout android:id="@+id/btnGroups"
+                android:layout_width="0dp" android:layout_height="72dp" android:layout_weight="1"
+                android:background="@drawable/card_bg" android:orientation="vertical"
+                android:gravity="center" android:padding="10dp"
+                android:clickable="true" android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="📦" android:textSize="24sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Groups" android:textSize="11sp"
+                    android:textColor="#FF1A1A1A" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <View android:layout_width="8dp" android:layout_height="match_parent"/>
+
+            <!-- Settings -->
+            <LinearLayout android:id="@+id/btnSettingsTab"
+                android:layout_width="0dp" android:layout_height="72dp" android:layout_weight="1"
+                android:background="@drawable/card_bg" android:orientation="vertical"
+                android:gravity="center" android:padding="10dp"
+                android:clickable="true" android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <!-- QUICK OPEN -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="QUICK OPEN" android:textSize="10sp"
+            android:textColor="#CCFFFFFF" android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="8dp">
+            <LinearLayout android:id="@+id/btnNotepad" style="@style/AppLaunchBtn" android:layout_weight="1">
+                <TextView style="@style/AppIcon" android:text="📝"/>
+                <TextView style="@style/AppLabel" android:text="Notepad"/></LinearLayout>
+            <View android:layout_width="8dp" android:layout_height="match_parent"/>
+            <LinearLayout android:id="@+id/btnCalculator" style="@style/AppLaunchBtn" android:layout_weight="1">
+                <TextView style="@style/AppIcon" android:text="🧮"/>
+                <TextView style="@style/AppLabel" android:text="Calculator"/></LinearLayout>
+            <View android:layout_width="8dp" android:layout_height="match_parent"/>
+            <LinearLayout android:id="@+id/btnTerminal" style="@style/AppLaunchBtn" android:layout_weight="1">
+                <TextView style="@style/AppIcon" android:text="💻"/>
+                <TextView style="@style/AppLabel" android:text="Terminal"/></LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="16dp">
+            <LinearLayout android:id="@+id/btnSettings" style="@style/AppLaunchBtn" android:layout_weight="1">
+                <TextView style="@style/AppIcon" android:text="⚙️"/>
+                <TextView style="@style/AppLabel" android:text="Settings"/></LinearLayout>
+            <View android:layout_width="8dp" android:layout_height="match_parent"/>
+            <LinearLayout android:id="@+id/btnFiles" style="@style/AppLaunchBtn" android:layout_weight="1">
+                <TextView style="@style/AppIcon" android:text="📁"/>
+                <TextView style="@style/AppLabel" android:text="Files"/></LinearLayout>
+            <View android:layout_width="8dp" android:layout_height="match_parent"/>
+            <LinearLayout android:id="@+id/btnBlank" style="@style/AppLaunchBtn" android:layout_weight="1">
+                <TextView style="@style/AppIcon" android:text="🪟"/>
+                <TextView style="@style/AppLabel" android:text="Blank"/></LinearLayout>
+        </LinearLayout>
+
+        <!-- WINDOW CONTROLS -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="WINDOW CONTROLS" android:textSize="10sp" android:textColor="#CCFFFFFF"
+            android:letterSpacing="0.12" android:layout_marginBottom="8dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="8dp">
+            <Button android:id="@+id/btnSwitchNext"
+                android:layout_width="0dp" android:layout_height="44dp" android:layout_weight="1"
+                android:text="⇄  Switch" android:backgroundTint="#FF1F5BBD"
+                android:textColor="#FFFFFFFF" android:textAllCaps="false" android:textSize="12sp"/>
+            <View android:layout_width="8dp" android:layout_height="match_parent"/>
+            <Button android:id="@+id/btnCloseAll"
+                android:layout_width="0dp" android:layout_height="44dp" android:layout_weight="1"
+                android:text="✕  Close All" android:backgroundTint="#FFC42B1C"
+                android:textColor="#FFFFFFFF" android:textAllCaps="false" android:textSize="12sp"/>
+        </LinearLayout>
+
+        <Button android:id="@+id/btnSwitchToVirtual"
+            android:layout_width="match_parent" android:layout_height="44dp"
+            android:text="🖥️  Switch to Virtual Desktop"
+            android:backgroundTint="#22FFFFFF" android:textColor="#FFFFFFFF"
+            android:textAllCaps="false" android:textSize="12sp" android:layout_marginBottom="8dp"/>
+
+        <Button android:id="@+id/btnStopService"
+            android:layout_width="match_parent" android:layout_height="44dp"
+            android:text="Stop Service &amp; Exit" android:backgroundTint="#15FFFFFF"
+            android:textColor="#AAFFFFFF" android:textAllCaps="false" android:textSize="12sp"/>
+
+    </LinearLayout>
+</ScrollView>

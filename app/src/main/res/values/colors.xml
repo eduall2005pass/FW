@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#FF0067C0</color>
+    <color name="win_accent">#FF0067C0</color>
+    <color name="win_accent_dark">#FF003E92</color>
+    <color name="win_bg">#FFFAFAFA</color>
+    <color name="win_titlebar_active">#FF0067C0</color>
+    <color name="win_titlebar_inactive">#FFE8E8E8</color>
+    <color name="win_close_hover">#FFC42B1C</color>
+    <color name="win_text_white">#FFFFFFFF</color>
+    <color name="win_text_dark">#FF1A1A1A</color>
+    <color name="win_text_muted">#FF666666</color>
+    <color name="win_border">#FFCCCCCC</color>
+</resources>
