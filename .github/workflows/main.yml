@@ -10,8 +10,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - uses: android-actions/setup-android@v3
-      - name: Generate Gradle Wrapper
-        run: gradle wrapper
       - run: chmod +x ./gradlew
       - run: ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
