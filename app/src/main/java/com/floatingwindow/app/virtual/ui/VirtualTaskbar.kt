@@ -1,3 +1,4 @@
+import android.view.View
 package com.floatingwindow.app.virtual.ui
 
 import android.content.Context

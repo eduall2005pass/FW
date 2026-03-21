@@ -238,7 +238,7 @@ class SettingsActivity : AppCompatActivity() {
                 super.onDraw(canvas)
                 try {
                     val bitmap = android.graphics.BitmapFactory.decodeResource(resources,
-                        com.floatingwindow.app.R.drawable.developer_siam)
+                        android.R.drawable.sym_contact_card)
                     if (bitmap != null) {
                         val size = minOf(width, height).toFloat()
                         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
