@@ -10,14 +10,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - uses: android-actions/setup-android@v3
-      - name: Install Gradle
+      - name: Fix Gradle Version
         run: |
-          wget -q https://services.gradle.org/distributions/gradle-8.2-bin.zip
-          unzip -q gradle-8.2-bin.zip
-          export PATH=$PATH:$PWD/gradle-8.2/bin
-          gradle wrapper
-          chmod +x gradlew
-          ./gradlew assembleDebug
+          sed -i 's|distributionUrl=.*|distributionUrl=https\\://services.gradle.org/distributions/gradle-8.2-bin.zip|' gradle/wrapper/gradle-wrapper.properties
+          curl -L "https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar" -o gradle/wrapper/gradle-wrapper.jar
+          chmod +x ./gradlew
+      - run: ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
         with:
           name: APK
