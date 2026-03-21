@@ -30,8 +30,79 @@ jobs:
           python3 -c "
           content = '<vector xmlns:android=\"http://schemas.android.com/apk/res/android\" android:width=\"24dp\" android:height=\"24dp\" android:viewportWidth=\"24\" android:viewportHeight=\"24\"><path android:fillColor=\"#FFFFFF\" android:pathData=\"M3,3 H21 V21 H3 Z M3,7 H21\"/></vector>'
           open('app/src/main/res/drawable/ic_window.xml','w').write(content)
-          print('Fixed!')
+          print('Drawable fixed!')
           "
+
+      - name: Fix All Kotlin Errors
+        run: |
+          python3 << 'PYEOF'
+          import re, os
+
+          # Fix PermissionActivity - val -> var
+          f = 'app/src/main/java/com/floatingwindow/app/permission/PermissionActivity.kt'
+          c = open(f).read()
+          c = re.sub(r'\bval (successOverlay)\b', r'var \1', c)
+          open(f,'w').write(c)
+          print('Fixed PermissionActivity')
+
+          # Fix SettingsActivity - val -> var
+          f = 'app/src/main/java/com/floatingwindow/app/settings/SettingsActivity.kt'
+          c = open(f).read()
+          c = re.sub(r'\bval (currentCard)\b', r'var \1', c)
+          open(f,'w').write(c)
+          print('Fixed SettingsActivity')
+
+          # Fix VirtualTaskbar - remove bad import line 2, keep package first
+          f = 'app/src/main/java/com/floatingwindow/app/virtual/ui/VirtualTaskbar.kt'
+          c = open(f).read()
+          lines = c.split('\n')
+          # Remove any import android.view.View that is before package
+          cleaned = []
+          pkg_found = False
+          for line in lines:
+              if line.strip().startswith('package '):
+                  pkg_found = True
+              if not pkg_found and 'import android.view.View' in line:
+                  continue
+              cleaned.append(line)
+          c = '\n'.join(cleaned)
+          # Now add import after package line properly
+          if 'import android.view.View' not in c:
+              c = c.replace('package com.floatingwindow.app.virtual.ui',
+                  'package com.floatingwindow.app.virtual.ui\n\nimport android.view.View')
+          open(f,'w').write(c)
+          print('Fixed VirtualTaskbar')
+
+          # Fix VirtualDesktopActivity - Int to Float
+          f = 'app/src/main/java/com/floatingwindow/app/virtual/ui/VirtualDesktopActivity.kt'
+          c = open(f).read()
+          c = re.sub(r'\bdp\((\d+)\)', r'dp(\1).toFloat()', c)
+          c = c.replace('.toFloat().toFloat()', '.toFloat()')
+          open(f,'w').write(c)
+          print('Fixed VirtualDesktopActivity')
+
+          # Fix VirtualDesktopView - lateinit engineListener
+          f = 'app/src/main/java/com/floatingwindow/app/virtual/ui/VirtualDesktopView.kt'
+          c = open(f).read()
+          c = re.sub(r'\bvar engineListener\b', 'lateinit var engineListener', c)
+          c = c.replace('lateinit lateinit', 'lateinit')
+          open(f,'w').write(c)
+          print('Fixed VirtualDesktopView')
+
+          # Fix GroupsActivity - AlertDialog syntax
+          f = 'app/src/main/java/com/floatingwindow/app/ui/GroupsActivity.kt'
+          c = open(f).read()
+          # Fix broken setTitle chain
+          c = re.sub(
+              r'\.setTitle\("([^"]+)",\s*"([^"]+)"\)',
+              r'.setTitle("\1")\n                    .setMessage("\2")',
+              c
+          )
+          open(f,'w').write(c)
+          print('Fixed GroupsActivity')
+
+          print('All fixes done!')
+          PYEOF
 
       - name: Build APK
         run: ./gradlew assembleDebug
