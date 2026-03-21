@@ -48,7 +48,7 @@ class VirtualDesktopView @JvmOverloads constructor(
     init {
         setWillNotDraw(false)
         setBackgroundColor(0xFF1A1A2E.toInt())
-        engine.addListener(engineListener)
+        post { engine.addListener(engineListener) }
     }
 
     override fun onSizeChanged(w: Int, h: Int, ow: Int, oh: Int) {

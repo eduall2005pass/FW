@@ -1,5 +1,6 @@
-import android.view.View
 package com.floatingwindow.app.virtual.ui
+
+import android.view.View
 
 import android.content.Context
 import android.graphics.Color
