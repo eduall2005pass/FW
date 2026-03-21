@@ -117,7 +117,7 @@ class VirtualDesktopActivity : AppCompatActivity() {
         val panel = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             background = GradientDrawable().apply {
-                cornerRadii = floatArrayOf(dp(16f),dp(16f),dp(16f),dp(16f),0f,0f,0f,0f)
+                cornerRadii = floatArrayOf(dp(16),dp(16),dp(16),dp(16),0f,0f,0f,0f)
                 setColor(0xFF16213E.toInt())
                 setStroke(dp(1), 0x33FFFFFF.toInt())
             }
@@ -132,7 +132,7 @@ class VirtualDesktopActivity : AppCompatActivity() {
         val searchField = EditText(this).apply {
             hint = "🔍  Search apps…"; setHintTextColor(0xFF888888.toInt())
             setTextColor(Color.WHITE)
-            background = GradientDrawable().apply { cornerRadius = dp(20f); setColor(0xFF2A3550.toInt()) }
+            background = GradientDrawable().apply { cornerRadius = dp(20).toFloat(); setColor(0xFF2A3550.toInt()) }
             setPadding(dp(14), dp(10), dp(14), dp(10)); textSize = 13f; isSingleLine = true
         }
         searchBar.addView(searchField, LinearLayout.LayoutParams(
@@ -184,7 +184,7 @@ class VirtualDesktopActivity : AppCompatActivity() {
                 val chip = TextView(this).apply {
                     text = "${vw.appType.emoji} ${vw.title}"
                     textSize = 11f; setTextColor(Color.WHITE)
-                    background = GradientDrawable().apply { cornerRadius = dp(6f); setColor(0xFF0067C0.toInt()) }
+                    background = GradientDrawable().apply { cornerRadius = dp(6).toFloat(); setColor(0xFF0067C0.toInt()) }
                     setPadding(dp(10), dp(5), dp(10), dp(5))
                     setOnClickListener { desktop.getEngine().switchTo(vw.id); hideStartMenu() }
                     layoutParams = LinearLayout.LayoutParams(
@@ -215,13 +215,13 @@ class VirtualDesktopActivity : AppCompatActivity() {
         }
         val closeAllBtn = TextView(this).apply {
             text = "✕  Close All"; textSize = 12f; setTextColor(0xFFFF6B6B.toInt())
-            background = GradientDrawable().apply { cornerRadius = dp(6f); setColor(0xFF2A1A1A.toInt()) }
+            background = GradientDrawable().apply { cornerRadius = dp(6).toFloat(); setColor(0xFF2A1A1A.toInt()) }
             setPadding(dp(12), dp(6), dp(12), dp(6))
             setOnClickListener { desktop.closeAll(); hideStartMenu() }
         }
         val switchBtn = TextView(this).apply {
             text = "⇄  Switch"; textSize = 12f; setTextColor(Color.WHITE)
-            background = GradientDrawable().apply { cornerRadius = dp(6f); setColor(0xFF1F3A6E.toInt()) }
+            background = GradientDrawable().apply { cornerRadius = dp(6).toFloat(); setColor(0xFF1F3A6E.toInt()) }
             setPadding(dp(12), dp(6), dp(12), dp(6))
             setOnClickListener { desktop.switchNext(); hideStartMenu() }
             layoutParams = LinearLayout.LayoutParams(
@@ -233,7 +233,7 @@ class VirtualDesktopActivity : AppCompatActivity() {
         }
         val backBtn = TextView(this).apply {
             text = "✕ Exit"; textSize = 12f; setTextColor(0xFFAAAAAA.toInt())
-            background = GradientDrawable().apply { cornerRadius = dp(6f); setColor(0xFF333333.toInt()) }
+            background = GradientDrawable().apply { cornerRadius = dp(6).toFloat(); setColor(0xFF333333.toInt()) }
             setPadding(dp(12), dp(6), dp(12), dp(6))
             setOnClickListener { finish() }
         }
@@ -264,7 +264,7 @@ class VirtualDesktopActivity : AppCompatActivity() {
         (startMenuOverlay.tag as? Runnable)?.run()
 
         val panel = startMenuOverlay.getChildAt(1)
-        panel.translationY = panel.height.toFloat().coerceAtLeast(dp(400f))
+        panel.translationY = panel.height.toFloat().coerceAtLeast(dp(400).toFloat())
         panel.alpha = 0f
         panel.animate().translationY(0f).alpha(1f)
             .setDuration(260).setInterpolator(DecelerateInterpolator(1.2f)).start()
@@ -274,7 +274,7 @@ class VirtualDesktopActivity : AppCompatActivity() {
         if (!startMenuVisible) return
         startMenuVisible = false
         val panel = startMenuOverlay.getChildAt(1)
-        panel.animate().translationY(panel.height.toFloat().coerceAtLeast(dp(400f))).alpha(0f)
+        panel.animate().translationY(panel.height.toFloat().coerceAtLeast(dp(400).toFloat())).alpha(0f)
             .setDuration(200).setInterpolator(DecelerateInterpolator())
             .withEndAction { startMenuOverlay.visibility = View.GONE }.start()
     }
