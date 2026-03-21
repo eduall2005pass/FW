@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Root: shadow wrapper + actual window card -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="6dp">
+
+    <!-- Window card (rounded, elevated) -->
+    <LinearLayout
+        android:id="@+id/windowCard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/window_bg"
+        android:elevation="16dp"
+        android:clipToOutline="true">
+
+        <!-- ── Title Bar ───────────────────────────────────────────────── -->
+        <LinearLayout
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#FF0067C0"
+            android:paddingStart="8dp"
+            android:paddingEnd="0dp">
+
+            <!-- Window icon -->
+            <ImageView
+                android:id="@+id/titleIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_window"
+                android:tint="#FFFFFFFF"
+                android:layout_marginEnd="6dp"/>
+
+            <!-- Title text -->
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Window"
+                android:textColor="#FFFFFFFF"
+                android:textSize="12sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"/>
+
+            <!-- Minimize button -->
+            <TextView
+                android:id="@+id/btnMinimize"
+                android:layout_width="46dp"
+                android:layout_height="32dp"
+                android:text="—"
+                android:textSize="14sp"
+                android:textColor="#FFFFFFFF"
+                android:gravity="center"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+            <!-- Maximize button -->
+            <TextView
+                android:id="@+id/btnMaximize"
+                android:layout_width="46dp"
+                android:layout_height="32dp"
+                android:text="□"
+                android:textSize="14sp"
+                android:textColor="#FFFFFFFF"
+                android:gravity="center"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+            <!-- Close button -->
+            <TextView
+                android:id="@+id/btnClose"
+                android:layout_width="46dp"
+                android:layout_height="32dp"
+                android:text="✕"
+                android:textSize="13sp"
+                android:textColor="#FFFFFFFF"
+                android:gravity="center"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        </LinearLayout>
+
+        <!-- ── Content Area ────────────────────────────────────────────── -->
+        <FrameLayout
+            android:id="@+id/contentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FFFFFFFF"/>
+
+        <!-- ── Status Bar ──────────────────────────────────────────────── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal"
+            android:background="#FFF0F0F0"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp">
+
+            <TextView
+                android:id="@+id/statusBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ready"
+                android:textSize="9sp"
+                android:textColor="#FF999999"/>
+
+            <!-- Resize handle (bottom-right) -->
+            <View
+                android:id="@+id/resizeHandle"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/resize_handle"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
