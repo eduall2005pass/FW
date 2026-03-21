@@ -39,56 +39,14 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun route() {
-        // Forced virtual (device had overlay crash before)
-        if (WindowModeDetector.isForcedVirtual(this)) {
-            showStatus("🖥️ Virtual Desktop Mode", 0xFF4CC9F0.toInt())
-            Handler(Looper.getMainLooper()).postDelayed({
-                startActivity(Intent(this, VirtualDesktopActivity::class.java))
-                finish()
-            }, 600)
-            return
+        PermissionChecker.requestNotificationPermission(this)
+        val status = PermissionChecker.check(this)
+        if (!status.hasOverlay) {
+            startActivity(PermissionChecker.buildPermissionIntent(this))
+        } else {
+            startActivity(Intent(this, MainActivity::class.java))
         }
-
-        val hasPermission = PermissionChecker.check(this).hasOverlay
-        if (!hasPermission) {
-            // No permission — detect if this is a permanently blocked device
-            if (WindowModeDetector.isKnownBlockedDevice() || WindowModeDetector.isMiuiBlocked()) {
-                // Known blocked device — go straight to virtual, skip permission request
-                showStatus("🖥️ Virtual Desktop Mode", 0xFF4CC9F0.toInt())
-                Handler(Looper.getMainLooper()).postDelayed({
-                    startActivity(Intent(this, VirtualDesktopActivity::class.java))
-                    finish()
-                }, 600)
-            } else {
-                // Unknown device, maybe they can grant it — show permission screen
-                showStatus("🔐 Checking permissions…", 0xFFFFAA00.toInt())
-                Handler(Looper.getMainLooper()).postDelayed({
-                    startActivity(Intent(this,
-                        com.floatingwindow.app.permission.PermissionActivity::class.java))
-                    finish()
-                }, 400)
-            }
-            return
-        }
-
-        // Has permission — now check if device will actually honor it
-        val mode = WindowModeDetector.detect(this)
-        when (mode) {
-            else -> {
-                showStatus("🪟 Overlay Mode Active", 0xFF3FB950.toInt())
-                Handler(Looper.getMainLooper()).postDelayed({
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                }, 500)
-            }
-            else -> {
-                showStatus("🖥️ Virtual Desktop Mode", 0xFF4CC9F0.toInt())
-                Handler(Looper.getMainLooper()).postDelayed({
-                    startActivity(Intent(this, VirtualDesktopActivity::class.java))
-                    finish()
-                }, 600)
-            }
-        }
+        finish()
     }
 
     private fun showStatus(msg: String, color: Int) {
