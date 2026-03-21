@@ -1,3 +1,4 @@
+name: Build APK
 on: [push, workflow_dispatch]
 jobs:
   build:
@@ -9,6 +10,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - uses: android-actions/setup-android@v3
+      - name: Check JAR
+        run: ls -la gradle/wrapper/
       - run: chmod +x ./gradlew
       - run: ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
