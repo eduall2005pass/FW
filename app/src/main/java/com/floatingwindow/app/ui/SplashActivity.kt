@@ -81,7 +81,7 @@ class SplashActivity : AppCompatActivity() {
                     finish()
                 }, 500)
             }
-            WindowModeDetector.WindowMode.VIRTUAL -> {
+            WindowModeDetector.WindowMode.OVERLAY -> {
                 showStatus("🖥️ Virtual Desktop Mode", 0xFF4CC9F0.toInt())
                 Handler(Looper.getMainLooper()).postDelayed({
                     startActivity(Intent(this, VirtualDesktopActivity::class.java))
