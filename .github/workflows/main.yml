@@ -1,25 +1,36 @@
 name: Build APK
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-      - uses: android-actions/setup-android@v3
-      - name: Fix
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Fix Gradle Wrapper
         run: |
-          curl -L "https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar" -o gradle/wrapper/gradle-wrapper.jar
-          chmod +x ./gradlew
-          sed -i 's/val successOverlay/var successOverlay/g' app/src/main/java/com/floatingwindow/app/permission/PermissionActivity.kt
-          sed -i 's/val currentCard/var currentCard/g' app/src/main/java/com/floatingwindow/app/settings/SettingsActivity.kt
-          sed -i 's/R\.drawable\.developer_siam/android.R.drawable.sym_contact_card/g' app/src/main/java/com/floatingwindow/app/settings/SettingsActivity.kt
-          sed -i '1s/^/import android.view.View\n/' app/src/main/java/com/floatingwindow/app/virtual/ui/VirtualTaskbar.kt
-      - run: ./gradlew assembleDebug
-      - uses: actions/upload-artifact@v4
+          wget -q https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar \
+          -O gradle/wrapper/gradle-wrapper.jar
+          chmod +x gradlew
+
+      - name: Build APK
+        run: ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
         with:
-          name: APK
+          name: app-debug
           path: app/build/outputs/apk/debug/*.apk
