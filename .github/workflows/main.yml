@@ -26,6 +26,20 @@ jobs:
           -O gradle/wrapper/gradle-wrapper.jar
           chmod +x gradlew
 
+      - name: Fix ic_window drawable
+        run: |
+          cat > app/src/main/res/drawable/ic_window.xml << 'XMLEOF'
+          <vector xmlns:android="http://schemas.android.com/apk/res/android"
+              android:width="24dp"
+              android:height="24dp"
+              android:viewportWidth="24"
+              android:viewportHeight="24">
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M3,3 H21 V21 H3 Z M3,7 H21 M7,3 V7"/>
+          </vector>
+          XMLEOF
+
       - name: Build APK
         run: ./gradlew assembleDebug
 
