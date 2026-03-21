@@ -130,7 +130,7 @@ class PermissionActivity : AppCompatActivity() {
             }
             val txt = TextView(this).apply {
                 text = step; textSize = 12f; setTextColor(0xEEFFFFFF.toInt())
-                lineSpacingMultiplier = 1.3f; setPadding(dp(10), dp(2), 0, 0)
+                setLineSpacing(0f, 1.3f); setPadding(dp(10), dp(2), 0, 0)
             }
             row.addView(num)
             row.addView(txt, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
@@ -182,7 +182,7 @@ class PermissionActivity : AppCompatActivity() {
         }
         val virtualDesc = TextView(this).apply {
             text = "Can't grant permission? No problem.\nVirtual Desktop mode works without any permission — fully functional floating windows inside the app."
-            textSize = 12f; setTextColor(0xCCFFFFFF.toInt()); lineSpacingMultiplier = 1.5f
+            textSize = 12f; setTextColor(0xCCFFFFFF.toInt()); setLineSpacing(0f, 1.5f)
             setPadding(0, dp(6), 0, dp(12))
         }
         val virtualBtn = TextView(this).apply {
