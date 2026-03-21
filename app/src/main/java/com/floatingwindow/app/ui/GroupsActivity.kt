@@ -288,7 +288,7 @@ class GroupsActivity : AppCompatActivity() {
     // ── Delete confirm ────────────────────────────────────────────────────────
     private fun confirmDelete(group: AppGroup) {
         AlertDialog.Builder(this)
-            .setTitle("Delete "${group.name}"?")
+            .setTitle("Delete ${group.name}?")
             .setMessage("This group will be permanently deleted.")
             .setPositiveButton("Delete") { _, _ ->
                 groupManager.deleteGroup(group.id)
