@@ -64,6 +64,7 @@ class FloatingWindowService : Service() {
 
     // ── Lifecycle ─────────────────────────────────────────────────────────────
     override fun onCreate() {
+        try {
         super.onCreate()
         instance = this
 

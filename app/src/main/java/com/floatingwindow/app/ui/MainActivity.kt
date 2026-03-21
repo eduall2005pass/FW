@@ -42,9 +42,11 @@ class MainActivity : AppCompatActivity() {
         applyTheme()
         wireButtons()
         updateModeIndicator()
+        } catch(e: Exception) { e.printStackTrace() }
     }
 
     override fun onResume() {
+        try {
         super.onResume()
         if (WindowModeDetector.isForcedVirtual(this) ||
             settings.defaultWindowMode == "virtual") { goToVirtual(); return }
