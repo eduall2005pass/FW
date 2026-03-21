@@ -74,14 +74,14 @@ class SplashActivity : AppCompatActivity() {
         // Has permission — now check if device will actually honor it
         val mode = WindowModeDetector.detect(this)
         when (mode) {
-            WindowModeDetector.WindowMode.OVERLAY -> {
+            else -> {
                 showStatus("🪟 Overlay Mode Active", 0xFF3FB950.toInt())
                 Handler(Looper.getMainLooper()).postDelayed({
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }, 500)
             }
-            WindowModeDetector.WindowMode.OVERLAY -> {
+            else -> {
                 showStatus("🖥️ Virtual Desktop Mode", 0xFF4CC9F0.toInt())
                 Handler(Looper.getMainLooper()).postDelayed({
                     startActivity(Intent(this, VirtualDesktopActivity::class.java))
