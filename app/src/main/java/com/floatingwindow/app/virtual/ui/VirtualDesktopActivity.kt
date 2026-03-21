@@ -117,7 +117,7 @@ class VirtualDesktopActivity : AppCompatActivity() {
         val panel = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             background = GradientDrawable().apply {
-                cornerRadii = floatArrayOf(dp(16),dp(16),dp(16),dp(16),0f,0f,0f,0f)
+                cornerRadii = floatArrayOf(dp(16).toFloat(),dp(16).toFloat(),dp(16).toFloat(),dp(16).toFloat(),0f,0f,0f,0f)
                 setColor(0xFF16213E.toInt())
                 setStroke(dp(1), 0x33FFFFFF.toInt())
             }
@@ -157,10 +157,14 @@ class VirtualDesktopActivity : AppCompatActivity() {
                     desktop.openApp(type)
                     hideStartMenu()
                 }
-                appGrid.addView(cell, GridLayout.LayoutParams(
+                val glp = GridLayout.LayoutParams(
                     GridLayout.spec(GridLayout.UNDEFINED, 1f),
                     GridLayout.spec(GridLayout.UNDEFINED, 1f)
-                ).apply { width=0; height=GridLayout.LayoutParams.WRAP_CONTENT; setMargins(dp(4),dp(4),dp(4),dp(4)) })
+                )
+                glp.width = 0
+                glp.height = GridLayout.LayoutParams.WRAP_CONTENT
+                glp.setMargins(dp(4),dp(4),dp(4),dp(4))
+                appGrid.addView(cell, glp)
             }
         }
         refreshGrid()
