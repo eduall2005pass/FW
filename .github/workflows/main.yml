@@ -10,9 +10,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - uses: android-actions/setup-android@v3
-      - name: Check JAR
-        run: ls -la gradle/wrapper/
-      - run: chmod +x ./gradlew
+      - name: Fix
+        run: |
+          curl -L "https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar" -o gradle/wrapper/gradle-wrapper.jar
+          chmod +x ./gradlew
+          sed -i 's/val successOverlay/var successOverlay/g' app/src/main/java/com/floatingwindow/app/permission/PermissionActivity.kt
+          sed -i 's/val currentCard/var currentCard/g' app/src/main/java/com/floatingwindow/app/settings/SettingsActivity.kt
+          sed -i 's/R\.drawable\.developer_siam/android.R.drawable.sym_contact_card/g' app/src/main/java/com/floatingwindow/app/settings/SettingsActivity.kt
+          sed -i '1s/^/import android.view.View\n/' app/src/main/java/com/floatingwindow/app/virtual/ui/VirtualTaskbar.kt
       - run: ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
         with:
