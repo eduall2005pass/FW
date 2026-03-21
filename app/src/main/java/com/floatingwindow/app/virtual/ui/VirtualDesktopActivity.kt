@@ -119,7 +119,7 @@ class VirtualDesktopActivity : AppCompatActivity() {
             background = GradientDrawable().apply {
                 cornerRadii = floatArrayOf(dp(16f),dp(16f),dp(16f),dp(16f),0f,0f,0f,0f)
                 setColor(0xFF16213E.toInt())
-                setStroke(dp(1), 0x33FFFFFF)
+                setStroke(dp(1), 0x33FFFFFF.toInt())
             }
             elevation = dp(24).toFloat()
         }
@@ -309,5 +309,5 @@ class VirtualDesktopActivity : AppCompatActivity() {
     }
 
     private fun dp(v: Int)   = (v * resources.displayMetrics.density).toInt()
-    private fun dp(v: Float) = (v * resources.displayMetrics.density).toInt()
+    private fun dp(v: Float) = v * resources.displayMetrics.density
 }
