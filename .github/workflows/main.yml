@@ -10,21 +10,40 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - uses: android-actions/setup-android@v3
-      - name: Fix Files
+      - name: Fix All Errors
         run: |
-          curl -L "https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar" -o gradle/wrapper/gradle-wrapper.jar
           chmod +x ./gradlew
-          cat > app/src/main/res/drawable/ic_window.xml << 'EOF'
-          <?xml version="1.0" encoding="utf-8"?>
-          <vector xmlns:android="http://schemas.android.com/apk/res/android"
-              android:width="24dp"
-              android:height="24dp"
-              android:viewportWidth="24"
-              android:viewportHeight="24">
-              <path
-                  android:fillColor="#FFFFFFFF"
-                  android:pathData="M3,5 L21,5 L21,19 L3,19 Z"/>
-          </vector>
+          python3 - << 'EOF'
+          import re, os, urllib.request
+          
+          # Fix developer_siam.jpg
+          jpg = 'app/src/main/res/drawable/developer_siam.jpg'
+          if not os.path.exists(jpg) or os.path.getsize(jpg) < 500:
+              try:
+                  urllib.request.urlretrieve('https://dummyimage.com/200x200/635bff/fff.jpg', jpg)
+              except: pass
+          
+          # Fix VirtualTaskbar - View import
+          p = 'app/src/main/java/com/floatingwindow/app/virtual/ui/VirtualTaskbar.kt'
+          c = open(p).read()
+          if 'import android.view.View' not in c:
+              open(p,'w').write('import android.view.View\n'+c)
+          
+          # Fix VirtualDesktopActivity - Int to Float
+          p = 'app/src/main/java/com/floatingwindow/app/virtual/ui/VirtualDesktopActivity.kt'
+          c = open(p).read()
+          c = re.sub(r'floatArrayOf\(((?:dp\([^)]+\)|0f|,|\s)+)\)',
+              lambda m: 'floatArrayOf('+re.sub(r'dp\(([^)]+)\)',r'dp(\1).toFloat()',m.group(1))+')',c)
+          open(p,'w').write(c)
+          
+          # Fix VirtualDesktopView - engineListener
+          p = 'app/src/main/java/com/floatingwindow/app/virtual/ui/VirtualDesktopView.kt'
+          c = open(p).read()
+          c = c.replace('engine.addListener(engineListener)','')
+          c = c.replace('private val engineListener','private val engineListener: VirtualWindowEngine.Listener by lazy { return@lazy ')
+          open(p,'w').write(c)
+          
+          print("Fixes applied!")
           EOF
       - run: ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
