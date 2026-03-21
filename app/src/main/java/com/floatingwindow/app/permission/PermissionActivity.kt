@@ -72,7 +72,7 @@ class PermissionActivity : AppCompatActivity() {
         }
         val desc = TextView(this).apply {
             text = "Required to show floating windows over other apps."; textSize = 13f
-            setTextColor(0xCCFFFFFF.toInt()); gravity = Gravity.CENTER; lineSpacingMultiplier = 1.4f
+            setTextColor(0xCCFFFFFF.toInt()); gravity = Gravity.CENTER; setLineSpacing(0f, 1.4f)
         }
         val deviceBadge = TextView(this).apply {
             text = "📱 ${info.deviceName}  •  Android ${Build.VERSION.RELEASE}"
@@ -154,11 +154,11 @@ class PermissionActivity : AppCompatActivity() {
             }
             if (info.warningNote != null) warnCard.addView(TextView(this).apply {
                 text = "⚠️  ${info.warningNote}"; textSize = 12f
-                setTextColor(0xFFFFEEAA.toInt()); lineSpacingMultiplier = 1.4f
+                setTextColor(0xFFFFEEAA.toInt()); setLineSpacing(0f, 1.4f)
             })
             if (isSamsung) warnCard.addView(TextView(this).apply {
                 text = "\n💡 Samsung tip: Toggle OFF then ON and restart the app if it doesn't work."
-                textSize = 12f; setTextColor(0xCCFFFFFF.toInt()); lineSpacingMultiplier = 1.4f
+                textSize = 12f; setTextColor(0xCCFFFFFF.toInt()); setLineSpacing(0f, 1.4f)
             })
             content.addView(warnCard, lp(dp(14)))
         }

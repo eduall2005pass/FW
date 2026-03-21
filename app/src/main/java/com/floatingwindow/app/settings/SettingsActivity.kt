@@ -534,7 +534,7 @@ class SettingsActivity : AppCompatActivity() {
         })
         if (subtitle.isNotEmpty()) textBlock.addView(TextView(this).apply {
             text = subtitle; textSize = 11f; setTextColor(theme.textSecondary)
-            setPadding(0, dp(2), 0, 0); lineSpacingMultiplier = 1.3f
+            setPadding(0, dp(2), 0, 0); setLineSpacing(0f, 1.3f)
         })
         row.addView(textBlock)
         return row
